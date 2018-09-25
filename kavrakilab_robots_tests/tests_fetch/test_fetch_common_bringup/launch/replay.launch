@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<launch>
+
+    <arg name="ros2udp" default="false" />
+    <arg name="robot_name" default="fetch"/>
+
+    <arg name="robot_description_xacro" value="$(find fetch_gazebo)/robots/fetch.gazebo.xacro" />
+
+    <param name="/use_sim_time" value="$(eval not ros2udp)" />
+
+    <!-- Robot description -->
+    <param name="robot_description" command="xacro --inorder '$(arg robot_description_xacro)' robot_name:=$(arg robot_name)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+
+    <!-- Robot state publisher
+    <include file="$(find robot_launch_files)/launch/essentials/robot_state_publisher.launch">
+        <arg name="bringup_package_path" value="$(arg common_bringup_package_path)" />
+        <arg name="robot_name" value="$(arg robot_name)" />
+        <arg name="output" value="log" />
+    </include>  -->
+	
+	<param name="robot_description" command="xacro --inorder '$(arg robot_description_xacro)' robot_name:=$(arg robot_name)" />    
+    
+
+</launch>
+

@@ -1,0 +1,6 @@
+- name   : "Soup Can Top Grasp"
+  waypoints :
+    - position    : [ 0.0, 0.0, .3 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]
+    - position    : [ 0.0, 0.0, .20 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]

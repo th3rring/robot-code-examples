@@ -1,0 +1,2 @@
+objects: [Can1, cube_sim]
+tf_ref_frame_id: world

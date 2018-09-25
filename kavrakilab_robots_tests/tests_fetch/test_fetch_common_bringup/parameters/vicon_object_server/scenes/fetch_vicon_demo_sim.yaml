@@ -1,0 +1,25 @@
+# Frame within the robot's URDF that the VICON frame is associated with.
+urdf_frame    : "base_link"
+
+# VICON detected frame on the robot.
+vicon_frame   : "vicon/fetch/fetch"
+
+# Offset of VICON frame from URDF frame.
+# Rotation is 90 deg around the z-axis.
+offset:
+  position: [0.0, 0.0, 0.0]
+  orientation: [0.0, 0.0, 0.0, 1.0]
+
+# Default objects to load into the scene.
+objects:
+  - file : "package://vicon_object_server_objects/objects/soup_can_sim.yaml"
+  - file : "package://vicon_object_server_objects/objects/table1.yaml"
+#  - file : "package://vicon_object_server_objects/objects/can1.yaml"
+#  - file : "package://vicon_object_server_objects/objects/can2.yaml"
+#  - file : "package://vicon_object_server_objects/objects/can3.yaml"
+
+# Default trajectories to load into the scene.
+trajectories:
+  - file : "package://vicon_object_server_objects/trajectories/soup_can_sim.yaml"
+  - file : "package://vicon_object_server_objects/trajectories/table1.yaml"
+#  - file : "package://vicon_object_server_objects/trajectories/box.yaml"

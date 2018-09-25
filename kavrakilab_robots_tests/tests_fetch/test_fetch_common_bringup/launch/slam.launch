@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<launch>
+
+	<arg name="bringup_package_path" value="$(find test_fetch_common_bringup)" />
+	<arg name="mapping" default="false" />
+	<arg name="simulation" default="false" />
+	
+	<!-- SLAM using GMapping -->
+	<arg name="output" default="screen" />
+	<arg name="gmapping_topic" value="/base_scan"/>
+	
+	<!-- Localization using AMCL -->
+	<arg name="map_file" default="simulation_map_gmapping" />
+	
+	<!-- Launch the Odometry estimator -->
+	<arg name="output_topic" default="odometry/filtered" />
+	
+	<group unless="$(arg simulation)">
+		<!-- Odometry Robot Localization -->
+		<node name="odometry" pkg="robot_localization" type="ekf_localization_node" clear_params="true" required="true">
+			<rosparam command="load" file="$(arg bringup_package_path)/parameters/world_modeling/ekf_odom.yaml" />
+			<remap from="odometry/filtered" to="odometry/filtered" />
+		</node>
+	</group>
+	
+	<group if="$(arg mapping)">
+		<!-- Start gmapping node --> 
+		<node name="slam_gmapping" pkg="gmapping" type="slam_gmapping" required="true" output="$(arg output)">
+            <remap from="scan" to="$(arg gmapping_topic)" />
+        </node>
+        <!-- node name="slam_karto" pkg="slam_karto" type="slam_karto" required="true" output="$(arg output)">
+        	<remap from="scan" to="$(arg gmapping_topic)" />
+        </node-->
+	</group>
+
+	<!-- Localization using AMCL -->
+	<group unless="$(arg mapping)">
+		<!-- MAP SERVER --> 
+		<node name="map_server_amcl" pkg="map_server" type="map_server" args="$(arg bringup_package_path)/parameters/maps/$(arg map_file).yaml" output="$(arg output)" required="true">
+		</node>
+
+		<!-- AMCL --> 
+		<node pkg="amcl" type="amcl" name="amcl" output="$(arg output)">
+			<remap from="scan" to="$(arg gmapping_topic)" />
+			<remap from="initialpose" to="amcl/initialpose" />
+			<rosparam command="load" file="$(arg bringup_package_path)/parameters/world_modeling/amcl.yaml" />
+		</node>
+	</group>
+
+</launch>

@@ -1,0 +1,54 @@
+<launch>
+	<arg name="vicon_bridge" default="false" />
+	<arg name="vicon_localization" default="false" />
+	<arg name="mapping" default="true" />
+	<arg name="moveit" default="false"/>
+	<arg name="output" default="log"/>
+	<arg name="map_file" default="kavrakilab_map_gmapping"/>
+	<arg name="allow_active_sensing" default="false"/>
+	<arg name="vicon_bridge_params_file" default="localization_tests.yaml"/>
+	<arg name="vicon_object_server" default="false" />
+  	
+  	<!-- Start Fetch -->
+  	<include file="$(find test_fetch_hardware_bringup)/launch/start.launch" />
+  	
+  	<!-- Navigation using Vicon bridge -->
+	<group if="$(arg vicon_bridge)">
+		<include file="$(find test_fetch_common_bringup)/launch/vicon_bridge.launch">
+			<arg name="simulation" value="false" />
+	    </include>
+	</group>  
+  
+	<!-- Navigation using Vicon -->
+	<group if="$(arg vicon_bridge)">
+		<!-- Vicon Localization -->
+		<include file="$(find test_fetch_common_bringup)/launch/vicon_localization.launch">
+			<arg name="simulation" value="false" />
+	    </include>
+	    <!-- Vicon Object Server -->
+	    <group if="$(arg vicon_object_server)">
+		    <include file="$(find vicon_object_server_server)/launch/server.launch">
+				<arg name="scene" value="fetch_pick_demo_vicon.yaml" />
+				<arg name="base_frame" value="map" />
+				<arg name="moveit" value="$(arg moveit)"/>
+				<arg name="output" value="$(arg output)"/>
+		    </include>
+		</group>
+	</group>
+	<!-- Navigation using SLAM or AMCL -->
+	<group unless="$(arg vicon_bridge)">
+		<!-- Localization and Mapping. SLAM if mapping:= true, only localization if false -->
+		<include file="$(find test_fetch_common_bringup)/launch/slam.launch">
+			<arg name="mapping" value="$(arg mapping)" />
+			<arg name="map_file" value="$(arg map_file)" />
+			<arg name="simulation" value="false" />
+	    </include>
+	</group>
+	
+	<!-- Moveit -->
+	<group if="$(arg moveit)">
+		<include file="$(find fetch_moveit_config)/launch/move_group.launch" >
+	  	</include>
+	</group>
+
+</launch>

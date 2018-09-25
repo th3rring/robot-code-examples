@@ -1,0 +1,47 @@
+<package format="2">
+  <name>test_fetch_common_bringup</name>
+  <version>0.0.0</version>
+  <description>The test_fetch_common_bringup package</description>
+
+  <maintainer email="juandhv@rice.edu">Juan David Hernandez Vega</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <!-- Fetch -->
+  <depend>fetch_moveit_config</depend>
+ 
+  <!-- World model --> 
+  <depend>map_server</depend>
+  <depend>amcl</depend>
+  <depend>gmapping</depend>
+  <depend>octomap</depend>
+  <depend>octomap_rviz_plugins</depend>
+
+  <!-- Navigation -->
+  <depend>robot_localization</depend>
+
+  <!-- Vicon Object Server -->
+  <depend>vicon_object_server_server</depend>
+  <depend>vicon_object_server_msgs</depend>
+  <depend>vicon_object_server_library</depend>
+  
+  <!-- Moveit -->
+  <depend>moveit_core</depend>
+  <depend>moveit_ros_planning_interface</depend>
+  <depend>moveit_ros_perception</depend>
+  
+  <!-- tf/tf2 -->
+  <depend>tf2</depend>
+  <depend>tf2_ros</depend>
+  
+  <!-- others -->
+  <depend>pluginlib</depend>
+  <depend>eigen</depend>
+  <depend>geometry_msgs</depend>
+  <depend>geometric_shapes</depend>
+  <depend>yaml-cpp</depend>
+  <depend>control_msgs</depend>
+
+</package>

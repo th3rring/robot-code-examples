@@ -1,0 +1,25 @@
+# Frame within the robot's URDF that the VICON frame is associated with.
+urdf_frame    : "base_link"
+
+# VICON detected frame on the robot.
+vicon_frame   : "base_link"
+
+offset:
+  position: [0.0, 0.0, 0.0]
+  orientation: [0.0, 0.0, 0.0, 1.0]
+
+# Default objects to load into the scene.
+objects:
+  #- file : "package://vicon_object_server_objects/objects/soup_can_sim.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/objects/target.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/objects/soup_can_sim.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/objects/demo_cube_sim.yaml"
+
+
+
+# Default trajectories to load into the scene.
+trajectories:
+  #- file : "package://vicon_object_server_objects/trajectories/soup_can_sim.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/trajectories/soup_can_sim.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/trajectories/target.yaml"
+

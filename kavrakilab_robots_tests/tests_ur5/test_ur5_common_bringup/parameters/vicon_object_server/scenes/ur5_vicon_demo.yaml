@@ -1,0 +1,28 @@
+# Frame within the robot's URDF that the VICON frame is associated with.
+urdf_frame    : "base_link"
+
+# VICON detected frame on the robot.
+vicon_frame   : "vicon/Thing1_Table/Thing1_Table"
+
+offset:
+  position: [1.004210126535352, -0.05800989999900542, 0.01409492685537786]
+  orientation: [-0.00495795879507445, -0.004694716973189589, 0.6826982476089626, 0.7306685164893721]
+
+# Default objects to load into the scene.
+objects:
+  #- file : "package://vicon_object_server_objects/objects/soup_can_sim.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/objects/target.yaml"
+  #- file : "package://test_ur5_common_bringup/parameters/vicon_object_server/objects/soup_can_sim.yaml"
+  #- file : "package://test_ur5_common_bringup/parameters/vicon_object_server/objects/demo_cube_sim.yaml"
+  - file : "package://vicon_object_server_objects/objects/can1.yaml"
+  - file : "package://vicon_object_server_objects/objects/game_block.yaml"
+
+
+
+# Default trajectories to load into the scene.
+trajectories:
+  #- file : "package://vicon_object_server_objects/trajectories/soup_can_sim.yaml"
+  #- file : "package://test_ur5_common_bringup/parameters/vicon_object_server/trajectories/soup_can_sim.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/trajectories/target.yaml"
+  #- file : "package://vicon_object_server_objects/trajectories/soup_can.yaml"
+  - file : "package://test_ur5_common_bringup/parameters/vicon_object_server/trajectories/soup_can.yaml"

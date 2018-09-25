@@ -1,0 +1,61 @@
+<launch>
+
+  <!-- GDB Debug Option -->
+  <arg name="debug" default="false"/>
+  <arg unless="$(arg debug)" name="launch_prefix" value=""/>
+  <arg if="$(arg debug)" name="launch_prefix" value="gdb -x $(find fetch_bringup)/launch/gdb_settings.gdb --ex run --args"/>
+
+  <!-- Calibration -->
+  <param name="calibration_date" value="2016-09-21 15:12:19"/>
+  <param name="base_controller/track_width" value="0.37476"/>
+  <param name="head_camera/driver/z_offset_mm" value="5"/>
+  <param name="head_camera/driver/z_scaling" value="0.9777183"/>
+  <arg name="rgb_camera_info_url" default="file:///etc/ros/indigo/depth_2016_09_21_15_10_32.yaml"/>
+  <arg name="depth_camera_info_url" default="file:///etc/ros/indigo/depth_2016_09_21_15_10_32.yaml"/>
+
+  <!-- Odometry -->
+  <param name="base_controller/publish_tf" value="false"/>
+  <!-- include file="$(find fetch_bringup)/launch/include/graft.launch.xml"/-->
+
+  <!-- URDF -->
+  <param name="robot_description" textfile="/etc/ros/indigo/calibrated_2016_09_21_15_10_32.urdf"/>
+
+  <!-- Drivers for Base -->
+  <node name="robot_driver" launch-prefix="$(arg launch_prefix)" pkg="fetch_drivers" type="robot_driver" output="log">
+    <param name="firmware_tar_gz" value="$(find fetch_drivers)/firmware.tar.gz"/>
+    <param name="has_base" value="true"/>
+    <param name="has_torso" value="true"/>
+    <param name="has_head" value="true"/>
+    <param name="has_arm" value="true"/>
+  </node>
+
+  <!-- Drivers for Gripper -->
+  <node name="gripper_driver" pkg="fetch_drivers" type="gripper_driver" output="log">
+    <param name="firmware_tar_gz" value="$(find fetch_drivers)/firmware.tar.gz"/>
+  </node>
+
+  <!-- Controllers -->
+  <rosparam file="$(find fetch_bringup)/config/default_controllers.yaml" command="load"/>
+
+  <!-- Joint State -> TF -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+
+  <!-- Head Camera -->
+  <include file="$(find fetch_bringup)/launch/include/head_camera.launch.xml">
+    <arg name="rgb_camera_info_url" value="$(arg rgb_camera_info_url)"/>
+    <arg name="depth_camera_info_url" value="$(arg depth_camera_info_url)"/>
+  </include>
+
+  <!-- Laser -->
+  <include file="$(find fetch_bringup)/launch/include/laser.launch.xml"/>
+
+  <!-- Teleop -->
+  <include file="$(find fetch_bringup)/launch/include/teleop.launch.xml"/>
+
+  <!-- Runstop -->
+  <include file="$(find fetch_bringup)/launch/include/runstop.launch.xml">
+    <arg name="flags" value="-a -b -g" />
+  </include>
+
+  
+</launch>

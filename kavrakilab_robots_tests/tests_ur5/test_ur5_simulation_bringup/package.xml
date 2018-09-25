@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>test_ur5_simulation_bringup</name>
+  <version>0.0.0</version>
+  <description>The test_ur5_simulation_bringup package</description>
+
+  <maintainer email="teh6@rice.edu">Thomas Herring</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- UR5 -->
+  <depend>ur_gazebo</depend>
+  <depend>ur5_robotiq85_moveit_config</depend>
+  <depend>robotiq_85_gazebo</depend>
+  
+  <!-- Vicon -->
+  <depend>vicon_bridge_emulator</depend>
+  
+  <!-- Gazebo -->
+  <depend>gazebo_ros</depend>
+  <depend>gazebo_plugins</depend>
+  
+  <!-- Test UR5 -->
+  <depend>test_ur5_common_bringup</depend>
+  <depend>test_ur5_desktop_bringup</depend>
+  
+</package>

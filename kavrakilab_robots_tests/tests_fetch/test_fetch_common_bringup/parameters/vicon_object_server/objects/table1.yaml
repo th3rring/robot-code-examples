@@ -1,0 +1,9 @@
+name            : "table1"
+frame           : "vicon/table1/table1"
+geometry        :
+  type          : "mesh"
+  resource      : "package://vicon_object_server_objects/meshes/cafe_table.dae"
+  dimensions    : [0.025, 0.025, 0.025]
+  offset        :
+    position    : [0, 0, 0]
+    orientation : [0.0, 0.0, 0.0, 1.0]

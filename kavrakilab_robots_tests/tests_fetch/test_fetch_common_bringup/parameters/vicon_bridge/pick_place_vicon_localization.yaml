@@ -1,0 +1,2 @@
+objects: [fetch, soup_can, table1, game_block]
+tf_ref_frame_id: map

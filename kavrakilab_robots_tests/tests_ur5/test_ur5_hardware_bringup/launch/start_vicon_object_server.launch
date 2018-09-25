@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="moveit" default="true"/>
+  <arg name="output" default="log"/>
+  <arg name="scene" default="ur5_vicon_demo.yaml" />
+
+
+
+  	<!-- Vicon bridge launched with moveit to ensure it is running beforehand -->
+
+  <include file="$(find vicon_object_server_server)/launch/server.launch">
+    <arg name="package_path" default="test_ur5_common_bringup/parameters/vicon_object_server/scenes"/>
+    <arg name="scene" value="$(arg scene)" />
+    <arg name="base_frame" value="world" />
+    <arg name="moveit" value="$(arg moveit)"/>
+    <arg name="output" value="$(arg output)"/>
+  </include>
+
+
+
+</launch>

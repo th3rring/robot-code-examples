@@ -1,0 +1,12 @@
+odom_frame: odom
+base_frame: base_link
+map_frame: map
+delta: 0.05
+map_update_interval: 1.0
+
+srr: 0.01 # (float, default: 0.1) Odometry error in translation as a function of translation (rho/rho)
+srt: 0.02 # (float, default: 0.2) Odometry error in translation as a function of rotation (rho/theta)
+str: 0.01 # (float, default: 0.1) Odometry error in rotation as a function of translation (theta/rho)
+stt: 0.02 # (float, default: 0.2) Odometry error in rotation as a function of rotation (theta/theta)
+
+particles: 30

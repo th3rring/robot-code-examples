@@ -1,0 +1,8 @@
+name            : "Can1"
+frame           : "vicon/soup_can/soup_can"
+geometry        :
+  type          : "cylinder"
+  dimensions    : [0.04, 0, 0.11]
+  offset        :
+    position    : [0.0, 0.0, 0.0]
+    orientation : [0.0, 0.0, 0.0, 1.0]

@@ -1,0 +1,4 @@
+- name   : "Table Set Object On"
+  waypoints :
+    - position    : [ -0.35, 0.0, 1.05 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<launch>
+	
+	<arg name="bringup_package_path" value="$(find test_fetch_common_bringup)" />
+	<arg name="simulation" default="false" />
+    
+    <!-- Launch the Odometry estimator -->
+    <arg name="output_topic" default="odometry/filtered" />
+    
+    <!-- Vicon Localization  -->
+    <node name="ekf_map" pkg="robot_localization" type="ekf_localization_node" clear_params="true" required="true">
+        <rosparam command="load" file="$(arg bringup_package_path)/parameters/world_modeling/ekf_vicon.yaml" />
+        <remap from="odometry/filtered" to="ekf_map/odometry" />
+    </node>
+    
+    <group if="$(arg simulation)">
+    	<!-- Transform from Vicon navigation data to odom -->
+    	<node name="navvicon_transform_node" pkg="test_fetch_common_bringup" type="navvicon_transform_node.py" required="true" output="screen">
+    		<rosparam>vicon_tf_to_vicon_odom_transl: [0.0, 0.0, 0.0]</rosparam>
+    		<rosparam>vicon_tf_to_vicon_odom_rot: [0.0, 0.0, 0.0]</rosparam>
+    		<param name="vicon_odom_frame" value="base_link"/>
+
+		    <remap from="/vicon/tf_data" to="/vicon/fetch/fetch" />
+    	</node>
+    </group>
+    <group unless="$(arg simulation)">
+    	<!-- Odometry Robot Localization -->
+	    <node name="odometry" pkg="robot_localization" type="ekf_localization_node" clear_params="true" required="true">
+	        <rosparam command="load" file="$(arg bringup_package_path)/parameters/world_modeling/ekf_odom.yaml" />
+	        <remap from="odometry/filtered" to="odometry/filtered" />
+	    </node>
+
+    	<!-- Transform from Vicon navigation data to odom -->
+    	<node name="navvicon_transform_node" pkg="test_fetch_common_bringup" type="navvicon_transform_node.py" required="true" output="screen">
+    		<rosparam>vicon_tf_to_vicon_odom_transl: [0.1382109862202984, -0.2163162742804265, -0.2993247618907506]</rosparam>
+    		<rosparam>vicon_tf_to_vicon_odom_rot: [0, 0, -0.958223]</rosparam>
+    		<param name="vicon_odom_frame" value="base_link"/>
+
+		    <remap from="/vicon/tf_data" to="/vicon/Fetch/Fetch" />
+    	</node>
+    </group>
+
+</launch>

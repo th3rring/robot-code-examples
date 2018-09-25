@@ -1,0 +1,8 @@
+name            : "Can1"
+frame           : "vicon/Can1/Can1"
+geometry        :
+  type          : "cylinder"
+  dimensions    : [0.0338, 0, 0.102]
+  offset        :
+    position    : [-0.01, -0.008, .037]
+    orientation : [0, 0, 0, 1.00]
