@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+	<arg name="simulation" default="true" />
+	<arg name="use_safety_obj" default="true"/>
+	<arg name="safety_obj_vicon_topic" default="vicon_object_server/demo_cube" />
+
+	<node pkg="pick_place_server_server" type="pick_place_server_server" name="pick_place_server_server" output="screen">
+		<param name="safety_obj_vicon_topic" value="$(arg safety_obj_vicon_topic)" type="string"/>
+		<param name="use_safety_obj" value="$(arg use_safety_obj)" type="bool"/>
+	</node>
+	
+	<include file="$(find test_ur5_common_bringup)/launch/gripper_server.launch">
+		<arg name="sim" value="$(arg simulation)"/>
+	</include>
+
+</launch>

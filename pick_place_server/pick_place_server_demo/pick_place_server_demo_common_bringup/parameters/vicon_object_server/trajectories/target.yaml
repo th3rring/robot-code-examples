@@ -1,0 +1,4 @@
+- name   : "Target Set Object On"
+  waypoints :
+    - position    : [ 0.6, 0.0, 0.5 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]

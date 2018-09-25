@@ -1,0 +1,12 @@
+#goal definition
+#true = open, false = close
+bool open
+string object
+#amount for gripper to close in simulation
+float32 sim_close_grip
+---
+#result definition
+int8 success
+---
+#feedback
+bool progress

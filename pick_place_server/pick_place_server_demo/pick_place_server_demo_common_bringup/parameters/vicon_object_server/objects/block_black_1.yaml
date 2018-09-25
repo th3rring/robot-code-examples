@@ -1,0 +1,8 @@
+name            : "block_black_1"
+frame           : "vicon/block_black_1/block_black_1"
+geometry        :
+  type          : "box"
+  dimensions    : [0.064, 0.064, 0.128]
+  offset        :
+    position    : [-0.003, 0.03, 0.058]
+    orientation : [0.002, 0.009, 0.182, .983]

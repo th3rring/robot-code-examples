@@ -1,0 +1,25 @@
+# Name of pick object
+string pick
+# Pick trajectory name and indexes
+string pick_traj_name
+uint16[] pick_traj_waypoints
+
+# Name of place object
+string place_frame
+# Place trajectory name and indexes
+string place_traj_name
+uint16[] place_traj_waypoints
+
+# Allow user to enter a vector of offsets manually
+uint8 num_place_poses
+float32[] place_positions
+float32[] place_orientations
+---
+# If didn't complete, result is incomplete trajectory
+string err_traj_name
+uint16 err_traj_waypoint
+---
+# Current trajectory
+#string cur_traj_name
+#uint16[] cur_traj_waypoints
+

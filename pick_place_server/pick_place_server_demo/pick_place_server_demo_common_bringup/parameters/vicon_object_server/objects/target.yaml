@@ -1,0 +1,8 @@
+name            : "Target"
+frame           : "base_link"
+geometry        :
+  type          : "box"
+  dimensions    : [0, 0, 0]
+  offset        :
+    position    : [0.6, 0, 0]
+    orientation : [0, 0, 0, 1.00]

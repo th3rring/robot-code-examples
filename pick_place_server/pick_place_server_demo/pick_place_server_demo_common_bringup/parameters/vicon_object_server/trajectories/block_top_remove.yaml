@@ -1,0 +1,8 @@
+- name   : "Block Top Remove"
+  waypoints :
+    - position    : [ 0.6, 0.0, 0.5 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]
+    - position    : [ 0.4, 0.2, .3 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]
+    - position    : [ 0.4, -0.2, .3 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- <env name="GAZEBO_RESOURCE_PATH" value="$(find test_ur5_simulation_bringup)/gazebo:$(optenv GAZEBO_RESOURCE_PATH)"/> -->
+
+  <arg name="paused" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="limited" default="true"/>
+  <!--<arg name="world_name" default="worlds/empty.world" /> -->
+  <arg name="world_name" default="$(find gazebo_ros_link_attacher)/worlds/test_attacher.world" /> 
+  <arg name="block_white" default = "$(find pick_place_server_demo_simulation_bringup)/gazebo/models/block_white/model.sdf"/>
+  <arg name="block_black" default = "$(find pick_place_server_demo_simulation_bringup)/gazebo/models/block_black/model.sdf"/>
+  <arg name="cube_sim" default = "$(find pick_place_server_demo_simulation_bringup)/gazebo/models/cube_sim/model.sdf"/>
+
+  <!-- test_zone.sdf, test_zone_pick_place.sdf, empty.world -->
+  <!-- <arg name="world_name" default="worlds/test_ur5_pick_and_place.world" />  -->
+  
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+  <!--[>startup simulation gripper server<]-->
+  <!--<include file="$(find test_ur5_common_bringup)/launch/gripper_server.launch">-->
+	  <!--<arg name="sim" value="true"/>-->
+  <!--</include>-->
+
+  <!-- send robot urdf to param server -->
+  <include file="$(find ur_description)/launch/ur5_robotiq85_upload.launch">
+    <arg name="limited" value="$(arg limited)"/>
+  </include>
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0 " respawn="false" output="screen" />
+
+  <!-- This command sets the joints when you start-->
+  <!-- <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0 -J shoulder_lift_joint -1.5707 " respawn="false" output="screen" /> -->
+  
+  <!-- spawn the cube and can -->
+  <node name="spawn_gazebo_model_block_white" pkg="gazebo_ros" type="spawn_model" args="-file $(arg block_white) -sdf -model block_white_1 -x -0.12 -y 0.2 -z 1" respawn="false" output="screen" />
+  <node name="spawn_gazebo_model_block_black" pkg="gazebo_ros" type="spawn_model" args="-file $(arg block_black) -sdf -model block_black_1 -x -0.25 -y 0.2 -z 1" respawn="false" output="screen" />
+  <node name="spawn_gazebo_model_cube_sim" pkg="gazebo_ros" type="spawn_model" args="-file $(arg cube_sim) -sdf -model cube_sim -x 0.2 -y -0.5 -z 1" respawn="false" output="screen" />
+
+  <!--<node name="spawn_gazebo_model_cube_sim_test" pkg="gazebo_ros" type="spawn_model" args="-file $(arg cube_sim) -sdf -model cube_sim_test -x 0 -y 0.219 -z 1.3144" respawn="false" output="screen" />-->
+
+  <include file="$(find ur_gazebo)/launch/controller_utils.launch"/>
+
+  <rosparam file="$(find ur_gazebo)/controller/arm_controller_ur5.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+
+  <rosparam file="$(find robotiq_85_gazebo)/controller/gripper_controller_robotiq.yaml" command="load"/>
+  <node name="gripper_controller_spawner" pkg="controller_manager" type="spawner" args="gripper" /> -->
+
+  <!-- sets initial state and upauses sim -->
+  <!--<node name="set_initial_state" pkg="ur_gazebo" type="set_initial_state.py" output="screen"/>-->
+
+
+</launch>

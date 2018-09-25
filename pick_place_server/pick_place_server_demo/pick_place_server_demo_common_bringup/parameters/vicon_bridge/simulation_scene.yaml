@@ -1,0 +1,2 @@
+objects: [block_white_1, block_black_1, cube_sim]
+tf_ref_frame_id: world

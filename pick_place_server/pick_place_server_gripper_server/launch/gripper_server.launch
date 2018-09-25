@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="sim" default="true" />
+
+	<node name="gripper_action_server" pkg="test_ur5_common_bringup" type="gripper_server" args="" respawn="false" output="screen" >
+		<param name="sim" value="$(arg sim)" type="bool"/>
+	</node>
+</launch>

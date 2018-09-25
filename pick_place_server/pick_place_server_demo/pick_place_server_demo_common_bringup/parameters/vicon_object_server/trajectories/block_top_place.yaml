@@ -1,0 +1,4 @@
+- name   : "Block Top Place"
+  waypoints :
+    - position    : [ 0.0, 0.0, .38 ]
+      orientation : [ 0.5, 0.5, -0.5, 0.5 ]

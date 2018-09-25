@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package format="2">
+	<name>pick_place_server_gripper_server</name>
+	<version>0.0.0</version>
+	<description>The tic_tac_toe_demos package</description>
+
+	<maintainer email="therring@todo.todo">therring</maintainer>
+
+
+	<license>TODO</license>
+
+	<buildtool_depend>catkin</buildtool_depend>
+
+	<!--Robotiq Gripper-->
+	<depend>robotiq_force_torque_sensor</depend>
+	<depend>robotiq_85_description</depend>
+	<depend>robotiq_85_msgs</depend>
+
+	<!-- tf/tf2 -->
+	<depend>tf2</depend>
+	<depend>tf2_ros</depend>
+
+	<!-- others -->
+	<depend>actionlib_msgs</depend>
+	<depend>gazebo_ros_link_attacher</depend>
+
+	<exec_depend>message_generation</exec_depend>
+</package>

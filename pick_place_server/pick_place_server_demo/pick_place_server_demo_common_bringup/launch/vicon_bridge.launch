@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="bringup_package_path" value="$(find pick_place_server_demo_common_bringup)" />
+
+	<arg name="simulation" default="false" />
+	<arg name="vicon_bridge_params_file" default="localization_tests.yaml" />
+
+	<group if="$(arg simulation)">
+		<!-- Vicon bridge emulator -->
+		<node pkg="vicon_bridge_emulator" type="vicon_bridge_emulator_node.py" name="vicon" output="screen">
+			<rosparam command="load" file="$(arg bringup_package_path)/parameters/vicon_bridge/$(arg vicon_bridge_params_file)" />
+		</node>
+	</group>
+	<group unless="$(arg simulation)">
+		<!-- Vicon bridge -->
+		<node pkg="vicon_bridge" type="vicon_bridge" name="vicon" output="log">
+			<param name="stream_mode" value="ClientPull" type="str" />
+			<!--param name="datastream_hostport" value="192.168.137.104:801" type="str" /-->
+			<param name="datastream_hostport" value="argus.cs.rice.edu:801" type="str" />
+			<param name="tf_ref_frame_id" value="world" type="str" />
+		</node>
+	</group>
+</launch>

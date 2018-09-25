@@ -1,0 +1,8 @@
+name            : "block_white_1"
+frame           : "vicon/block_white_1/block_white_1"
+geometry        :
+  type          : "box"
+  dimensions    : [0.064, 0.064, 0.128]
+  offset        :
+    position    : [-0.01, 0.01, 0.058]
+    orientation : [-.016, .007, .407, .914]
